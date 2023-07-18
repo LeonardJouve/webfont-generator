@@ -93,7 +93,7 @@ const getNodes = (svg: string): Node[] => {
 
 const OPEN_TAG = /<\w+/;
 const CLOSE_TAG = '>';
-const TAG =  /(?<=<)\w+(?=\s)/;
+const TAG =  /(?!<)\w+(?=\s)/;
 
 const getNode = (svg: string, start: number): Node|null => {
     const slice = svg.substring(start);
