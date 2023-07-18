@@ -1,9 +1,9 @@
 {
   "name": "webfont",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "run": "ts-node ./index.ts"
+    "run": "ts-node src/index.ts"
   },
   "author": "",
   "license": "ISC",

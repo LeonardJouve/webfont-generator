@@ -1,4 +1,16 @@
-enum SvgNodeTypes {
+export type ViewBox = {
+    x: number;
+    y: number;
+    width: number;
+}
+
+export type Icon = {
+    name: string;
+    path: string;
+    width: number;
+};
+
+export enum SvgNodeTags {
     PATH = 'path',
     GLYPH = 'glyph',
     CIRCLE = 'circle',
@@ -9,89 +21,88 @@ enum SvgNodeTypes {
     LINE = 'line',
 }
 
+export type Node = {
+    name: string;
+    content: string;
+    end: number;
+};
+
 export type SvgNode = PathNode | GlyphNode | CircleNode | EllipseNode | RectangleNode | PolygonNode | PolylineNode | LineNode;
 
-type Attributes<T extends Record<string, string>> = {[K in keyof T as T[K] extends string ? Lowercase<T[K]> : never]: number};
-
-enum PathAttributes {
-    D = 'd',
-}
+export const REQUIRED_ATTRIBUTES = {
+    [SvgNodeTags.PATH]: {
+        d: 'string',
+    },
+    [SvgNodeTags.GLYPH]: {
+        d: 'string',
+    },
+    [SvgNodeTags.CIRCLE]: {
+        cx: 'number',
+        cy: 'number',
+        r: 'number',
+    },
+    [SvgNodeTags.ELLIPSE]: {
+        cx: 'number',
+        cy: 'number',
+        rx: 'number',
+        ry: 'number',
+    },
+    [SvgNodeTags.RECTANGLE]: {
+        x: 'number',
+        y: 'number',
+        width: 'number',
+        height: 'number',
+    },
+    [SvgNodeTags.POLYGON]: {
+        points: 'string',
+    },
+    [SvgNodeTags.POLYLINE]: {
+        points: 'string',
+    },
+    [SvgNodeTags.LINE]: {
+        x1: 'number',
+        y1: 'number',
+        x2: 'number',
+        y2: 'number',
+    }
+};
 
 export type PathNode = {
-    type: SvgNodeTypes.PATH;
-    attributes: Attributes<typeof PathAttributes>;
+    tag: SvgNodeTags.PATH;
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.PATH], string>;
 };
-
-enum GlyphAttributes {
-    D = 'd',
-}
 
 export type GlyphNode = {
-    type: SvgNodeTypes.GLYPH;
-    attributes: Attributes<typeof GlyphAttributes>;
+    tag: SvgNodeTags.GLYPH;
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.GLYPH], string>;
 };
-
-enum CircleAttributes {
-    CX = 'cx',
-    CY = 'cy',
-    R = 'r',
-}
 
 export type CircleNode = {
-    type: SvgNodeTypes.CIRCLE,
-    attributes: Attributes<typeof CircleAttributes>;
+    tag: SvgNodeTags.CIRCLE,
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.CIRCLE], number>;
 };
-
-enum EllipseAttributes {
-    CX = 'cx',
-    CY = 'cy',
-    RX = 'rx',
-    RY = 'ry',
-}
 
 export type EllipseNode = {
-    type: SvgNodeTypes.ELLIPSE;
-    attributes: Attributes<typeof EllipseAttributes>;
+    tag: SvgNodeTags.ELLIPSE;
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.ELLIPSE], number>;
 };
-
-enum RectangleAttributes {
-    X = 'x',
-    Y = 'y',
-    WIDTH = 'width',
-    HEIGHT = 'height',
-}
 
 export type RectangleNode = {
-    type: SvgNodeTypes.RECTANGLE;
-    attributes: Attributes<typeof RectangleAttributes>;
+    tag: SvgNodeTags.RECTANGLE;
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.RECTANGLE], number>;
 };
-
-enum PolygonAttributes {
-    POINTS = 'points',
-}
 
 export type PolygonNode = {
-    type: SvgNodeTypes.POLYGON;
-    attributes: Attributes<typeof PolygonAttributes>;
+    tag: SvgNodeTags.POLYGON;
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.POLYGON], string>;
 };
-
-enum PolylineAttributes {
-    POINTS = 'points',
-}
 
 export type PolylineNode = {
-    type: SvgNodeTypes.POLYLINE;
-    attributes: Attributes<typeof PolylineAttributes>;
+    tag: SvgNodeTags.POLYLINE;
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.POLYLINE], string>;
 };
 
-enum LineAttributes {
-    X1 = 'x1',
-    Y1 = 'y1',
-    X2 = 'x2',
-    Y2 = 'y2',
-}
-
 export type LineNode = {
-    type: SvgNodeTypes.LINE;
-    attributes: Attributes<typeof LineAttributes>;
+    tag: SvgNodeTags.LINE;
+    attributes: Record<keyof typeof REQUIRED_ATTRIBUTES[SvgNodeTags.LINE], number>;
 };
