@@ -1,0 +1,28 @@
+{
+    "name": "webfont",
+    "units_per_em": 1000,
+    "glyphs": [
+        {
+            "uid": "0",
+            "css": "test",
+            "code": 59392,
+            "src": "custom_icons",
+            "selected": true,
+            "svg": {
+                "path": "M791.7 267.1L732.9 208.3 500 441.2 267.1 208.3 208.3 267.1 441.2 500 208.3 732.9 267.1 791.7 500 558.8 732.9 791.7 791.7 732.9 558.8 500Z",
+                "width": 1000
+            }
+        },
+        {
+            "uid": "1",
+            "css": "test2",
+            "code": 59393,
+            "src": "custom_icons",
+            "selected": true,
+            "svg": {
+                "path": "",
+                "width": 1000
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "webfont",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "run": "ts-node ./index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "@types/yauzl": "^2.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.6.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "svgpath": "^2.6.0",
+    "yauzl": "^2.10.0"
+  }
+}
