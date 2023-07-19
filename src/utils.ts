@@ -1,8 +1,37 @@
 import fs from 'fs';
 import {fromBuffer, type Entry} from 'yauzl';
-import type {Icon} from 'types/svg';
+import type {Icon} from '../types/svg';
 
-export const unzip = async (zip: Buffer, dist: string): Promise<true> => new Promise((resolve, reject) => {
+export const parseArguments = <Args extends Record<string, number>>(args: string[], searched: Args): Record<keyof Args, string[]> => {
+    const invalidIndex: number[] = [];
+    const argsLength = args.length;
+    return Object.entries(searched).reduce((acc, [search, number]) => {
+        const searchArgs: string[] = [];
+        const newInvalidIndex: number[] = [];
+        const searchIndex = args.indexOf(`--${search}`);
+        let isArgAvailable = true;
+        if (searchIndex !== -1) {
+            for (let i = 0; i < number; i++) {
+                const index = searchIndex + i;
+                newInvalidIndex.push(index);
+                searchArgs.push(args[index]);
+                if (invalidIndex.includes(index) || index >= argsLength) {
+                    isArgAvailable = false;
+                    break;
+                }
+            }
+        }
+        if (isArgAvailable) {
+            invalidIndex.push(...newInvalidIndex);
+        }
+        return {
+            ...acc,
+            [search]: isArgAvailable ? searchArgs : [],
+        };
+    }, {} as Record<keyof Args, string[]>);
+};
+
+export const unzip = async (zip: Buffer, outPath: string): Promise<true> => new Promise((resolve, reject) => {
     fromBuffer(zip, {lazyEntries: true}, (error, zipFile) => {
         if (error) {
             reject(error);
@@ -17,7 +46,7 @@ export const unzip = async (zip: Buffer, dist: string): Promise<true> => new Pro
             const {fileName} = entry;
             if (/\/$/.test(fileName)) {
                 [directory] = fileName.split('/');
-                const directoryName = fileName.replace(directory, dist);
+                const directoryName = fileName.replace(directory, outPath);
                 if (fs.existsSync(directoryName)) {
                     fs.rmSync(directoryName, {recursive: true});
                 }
@@ -30,7 +59,7 @@ export const unzip = async (zip: Buffer, dist: string): Promise<true> => new Pro
                         return;
                     }
 
-                    const writeStream = fs.createWriteStream(fileName.replace(directory, dist));
+                    const writeStream = fs.createWriteStream(fileName.replace(directory, outPath));
 
                     readStream.pipe(writeStream);
 
@@ -43,8 +72,8 @@ export const unzip = async (zip: Buffer, dist: string): Promise<true> => new Pro
     });
 });
 
-export const updateConfig = (configPath: string, icons: Icon[]) => {
-    const config = JSON.parse(fs.readFileSync(configPath, {encoding: 'utf-8'}));
+export const updateConfig = (icons: Icon[]) => {
+    const config = JSON.parse(fs.readFileSync('./config.json', {encoding: 'utf-8'}));
     const code = 0xE800;
     config['glyphs'] = icons.map(({name, path, width}, index) => ({
         uid: String(index),
@@ -57,5 +86,5 @@ export const updateConfig = (configPath: string, icons: Icon[]) => {
             width,
         },
     }));
-    fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
+    fs.writeFileSync('./config.json', JSON.stringify(config, null, 4));
 };

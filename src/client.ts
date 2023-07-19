@@ -3,8 +3,8 @@ import FormData from 'form-data';
 import https, {type RequestOptions} from 'https';
 import type {IncomingMessage} from 'http';
 
-export const openSession = (configPath: string): Promise<string> => new Promise((resolve, reject) => {
-    const config = fs.createReadStream(configPath);
+export const openSession = (): Promise<string> => new Promise((resolve, reject) => {
+    const config = fs.createReadStream('./config.json');
 
     const data = new FormData();
 

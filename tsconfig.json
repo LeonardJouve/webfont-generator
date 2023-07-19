@@ -1,8 +1,11 @@
 {
     "compilerOptions": {
       "allowJs": false,
-      "typeRoots": ["./types"],
-      "lib": ["es6", "ES2021"],
+      "strict": true,
+      "types": ["node"],
+      "lib": ["ES2022"],
+      "module": "commonjs",
+      "target": "ES2022",
       "allowSyntheticDefaultImports": true,
       "allowUnreachableCode": false,
       "allowUnusedLabels": false,
@@ -10,7 +13,6 @@
       "isolatedModules": true,
       "moduleResolution": "node",
       "noEmit": false,
-      "strict": true,
       "importHelpers": true,
       "forceConsistentCasingInFileNames": true,
       "declaration": true,
@@ -25,6 +27,7 @@
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
       "resolveJsonModule": true,
-      "baseUrl": ".",
+      "outDir": "lib"
     },
+  "include": ["src/**/*"]
   }
