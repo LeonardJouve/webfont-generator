@@ -30,10 +30,10 @@ if (help.length) {
         '\n',
         'Usage:\n',
         'webfont-generator {options}\n',
-        '----------------------------------------------------------------\n',
+        '---------------------------------------------------------------\n',
         '--icons {path} | default "icons" | Path to the svg icons folder\n',
         '--out {path} | default "webfont" | Path to the output folder\n',
-        '----------------------------------------------------------------\n',
+        '---------------------------------------------------------------\n',
     );
 } else {
     main(icons, out);
