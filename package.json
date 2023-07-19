@@ -1,12 +1,15 @@
 {
-  "name": "webfont",
+  "name": "webfont-generator",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "lib/src/index.js",
   "scripts": {
-    "run": "ts-node src/index.ts"
+    "run": "ts-node src/index.ts",
+    "build": "tsc"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": {
+    "webfont-generator": "lib/src/index.js"
+  },
+  "author": "Leonard Jouve",
   "devDependencies": {
     "@types/node": "^20.4.2",
     "@types/yauzl": "^2.10.0",
