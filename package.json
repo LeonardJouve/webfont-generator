@@ -1,15 +1,29 @@
 {
-  "name": "webfont-generator",
-  "version": "1.0.0",
-  "main": "lib/src/index.js",
+  "name": "webfont-generator-cli",
+  "description": "Generate webfont from svgs",
+  "version": "1.0.3",
+  "author": "Leonard Jouve leonard.jouve@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeonardJouve/webfont-generator-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LeonardJouve/webfont-generator-cli/issues"
+  },
+  "homepage": "https://github.com/LeonardJouve/webfont-generator-cli",
+  "keywords": [
+    "webfont",
+    "font",
+    "svg",
+    "fontello"
+  ],
   "scripts": {
     "run": "ts-node src/index.ts",
     "build": "tsc"
   },
   "bin": {
-    "webfont-generator": "lib/src/index.js"
+    "webfont-generator": "lib/index.js"
   },
-  "author": "Leonard Jouve",
   "devDependencies": {
     "@types/node": "^20.4.2",
     "@types/yauzl": "^2.10.0",

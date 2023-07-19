@@ -2,13 +2,15 @@ import fs from 'fs';
 import FormData from 'form-data';
 import https, {type RequestOptions} from 'https';
 import type {IncomingMessage} from 'http';
+import type {Config} from './types/svg';
 
-export const openSession = (): Promise<string> => new Promise((resolve, reject) => {
-    const config = fs.createReadStream('./config.json');
+export const openSession = (config: Config): Promise<string> => new Promise((resolve, reject) => {
+    fs.writeFileSync('config.json', JSON.stringify(config, null, 4));
+    const configStream = fs.createReadStream('config.json');
 
     const data = new FormData();
 
-    data.append('config', config);
+    data.append('config', configStream);
 
     const options: RequestOptions = {
         hostname: 'fontello.com',
@@ -26,6 +28,7 @@ export const openSession = (): Promise<string> => new Promise((resolve, reject) 
         response.on('data', (data: Buffer) => buffers.push(data));
         response.on('end', () => {
             const {statusCode} = response;
+            fs.rmSync('config.json');
             if (statusCode && statusCode >= 400) {
                 reject(buffers.toString());
                 return;

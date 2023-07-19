@@ -13,7 +13,7 @@ import {
     type Node,
     type Icon,
     type ViewBox,
-} from '../types/svg';
+} from './types/svg';
 
 const SVG_EXTENSION = /\.svg$/;
 

@@ -3,12 +3,17 @@
 import {openSession, download} from './client';
 import {parseArguments, updateConfig, unzip} from './utils';
 import {getIcons} from './svg_parser';
+import type {Config} from './types/svg';
 
 const main = async (iconsPath = 'icons', outPath = 'webfont') => {
     try {
+        let config: Config = {
+            name: 'webfont',
+            glyphs: [],
+        };
         const icons = getIcons(iconsPath);
-        updateConfig(icons);
-        const sessionId = await openSession();
+        config = updateConfig(config, icons);
+        const sessionId = await openSession(config);
         const zip = await download(sessionId);
         await unzip(zip, outPath);
         console.log('✅ Done');

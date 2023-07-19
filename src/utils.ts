@@ -1,6 +1,6 @@
 import fs from 'fs';
 import {fromBuffer, type Entry} from 'yauzl';
-import type {Icon} from '../types/svg';
+import type {Config, Icon} from './types/svg';
 
 export const parseArguments = <Args extends Record<string, number>>(args: string[], searched: Args): Record<keyof Args, string[]> => {
     const invalidIndex: number[] = [];
@@ -72,10 +72,10 @@ export const unzip = async (zip: Buffer, outPath: string): Promise<true> => new 
     });
 });
 
-export const updateConfig = (icons: Icon[]) => {
-    const config = JSON.parse(fs.readFileSync('./config.json', {encoding: 'utf-8'}));
+export const updateConfig = (config: Config, icons: Icon[]): Config => {
+    const newConfig = {...config};
     const code = 0xE800;
-    config['glyphs'] = icons.map(({name, path, width}, index) => ({
+    newConfig['glyphs'] = icons.map(({name, path, width}, index) => ({
         uid: String(index),
         css: name,
         code: code + index,
@@ -86,5 +86,5 @@ export const updateConfig = (icons: Icon[]) => {
             width,
         },
     }));
-    fs.writeFileSync('./config.json', JSON.stringify(config, null, 4));
+    return newConfig;
 };

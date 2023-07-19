@@ -1,8 +1,25 @@
+export type Config = {
+    name: string;
+    glyphs: Glyph[];
+};
+
+type Glyph = {
+    uid: string;
+    css: string;
+    code: number;
+    src: 'custom_icons';
+    selected: true;
+    svg: {
+        path: string;
+        width: number;
+    };
+};
+
 export type ViewBox = {
     x: number;
     y: number;
     width: number;
-}
+};
 
 export type Icon = {
     name: string;

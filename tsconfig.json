@@ -13,7 +13,6 @@
       "isolatedModules": true,
       "moduleResolution": "node",
       "noEmit": false,
-      "importHelpers": true,
       "forceConsistentCasingInFileNames": true,
       "declaration": true,
       "noImplicitAny": true,
