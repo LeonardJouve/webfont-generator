@@ -41,25 +41,17 @@ const getSvgViewBox = (svg: string): ViewBox => {
     }
     const {content} = svgNode;
     const viewBox = getAttribute(content, 'viewBox');
-    if (viewBox) {
-        const viewBoxArray = viewBox.split(' ');
-        if (viewBoxArray.length < 4) {
-            throw new Error(`Invalid viewBox attribute. It must containe 4 numbers. ${viewBox}`);
-        }
-        return {
-            x: Number(viewBoxArray[0]),
-            y: Number(viewBoxArray[1]),
-            width: Number(viewBoxArray[2]),
-        };
+    if (!viewBox) {
+        throw new Error('Svg must contain viewBox attribute');
     }
-    const width = getAttribute(content, 'width');
-    if (!width) {
-        throw new Error('Svg must contain at least width or viewBox attribute');
+    const viewBoxArray = viewBox.split(' ');
+    if (viewBoxArray.length < 4) {
+        throw new Error(`Invalid viewBox attribute. It must contain 4 numbers. ${viewBox}`);
     }
     return {
-        width: Number(width),
-        x: 0,
-        y: 0,
+        x: Number(viewBoxArray[0]),
+        y: Number(viewBoxArray[1]),
+        width: Number(viewBoxArray[2]),
     };
 };
 

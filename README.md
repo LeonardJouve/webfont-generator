@@ -79,7 +79,7 @@ You can use the `[class^="icon-"]:before, [class*=" icon-"]:before` CSS selector
 my-icons
     - close.svg
     - profile.svg
-index.hml
+index.html
 ```
 
 `npx webfont-generator --icons my-icons --out my-webfont`
