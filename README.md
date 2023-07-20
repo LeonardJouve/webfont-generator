@@ -92,8 +92,8 @@ index.html
     <link rel="stylesheet" href="./my-webfont/css/webfont.css">
   </head>
   <body>
-        <i class="icon-close"></i>
         <i class="icon-profile"></i>
+        <i class="icon-close"></i>
     </body>
 </html>
 ```
