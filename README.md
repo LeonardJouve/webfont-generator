@@ -82,6 +82,8 @@ my-icons
 index.html
 ```
 
+Every SVG must have a [viewBox](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox) attribute.
+
 `npx webfont-generator --icons my-icons --out my-webfont`
 
 index.html

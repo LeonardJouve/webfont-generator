@@ -1,7 +1,7 @@
 {
   "name": "webfont-generator-cli",
   "description": "Generate webfont from svgs",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "Leonard Jouve leonard.jouve@gmail.com",
   "repository": {
     "type": "git",

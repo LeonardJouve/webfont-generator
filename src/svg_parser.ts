@@ -22,15 +22,20 @@ export const getIcons = (iconsPath: string): Icon[] => {
     return icons.
         filter((icon) => SVG_EXTENSION.test(icon)).
         map((icon) => {
-            const svg = fs.readFileSync(`${iconsPath}/${icon}`, {encoding: 'utf-8'});
-            const {x, y, width} = getSvgViewBox(svg);
-            const path =  scalePath(getIconPath(svg), 1000 / width, x + width / 2, y);
-            const name = icon.replaceAll('_', '-').replace(SVG_EXTENSION, '');
-            return {
-                name,
-                path,
-                width,
-            };
+            const path = `${iconsPath}/${icon}`;
+            const svg = fs.readFileSync(path, {encoding: 'utf-8'});
+            try {
+                const {x, y, width} = getSvgViewBox(svg);
+                const path =  scalePath(getIconPath(svg), 1000 / width, x + width / 2, y);
+                const name = icon.replaceAll('_', '-').replace(SVG_EXTENSION, '');
+                return {
+                    name,
+                    path,
+                    width,
+                };
+            } catch (error) {
+                throw new Error(`${error} in ${path}`);
+            }
         });
 };
 
